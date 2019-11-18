@@ -18,5 +18,5 @@ jobs:
       env:
         CMAKE_PATH: /usr/bin/cmake
       run: |
-        $CMAKE_PATH -H. -B_builds
+        CXX=g++-9 $CMAKE_PATH -H. -B_builds
         echo ":o)"
