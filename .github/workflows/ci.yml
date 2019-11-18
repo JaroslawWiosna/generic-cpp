@@ -1,0 +1,22 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v1
+    - name: fetch ppa for cmake
+      run: |
+        wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | sudo apt-key add -
+        sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'
+    - name: install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -qq cmake g++-9
+    - name: build concepts
+      env:
+        CMAKE_PATH: /usr/bin/cmake
+      run: |
+        $CMAKE_PATH -H. -B_builds
+        echo ":o)"
