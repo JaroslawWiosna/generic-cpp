@@ -19,4 +19,6 @@ jobs:
         CMAKE_PATH: /usr/bin/cmake
       run: |
         CXX=g++-9 $CMAKE_PATH -H. -B_builds
+        cd _builds
+        make -j2
         echo ":o)"
