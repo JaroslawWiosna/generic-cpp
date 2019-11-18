@@ -13,10 +13,9 @@ jobs:
     - name: install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -qq cmake g++-9
+        sudo apt-get install -qq cmake g++-9 docker
     - name: build concepts
       env:
         CMAKE_PATH: /usr/bin/cmake
       run: |
-        $CMAKE_PATH -H. -B_builds
-        echo ":o)"
+        docker run --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp g++:latest g++ -std=c++2a -fconcepts main.cpp -o concept
